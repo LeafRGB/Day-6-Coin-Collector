@@ -22,15 +22,20 @@ function setup() {
 }
 
 function draw() {
+  //Background
   background(backgroundColor);
+  //"Coins" that are meant to be collected
   fill(fillrand1, 100, 100)
   ellipse(coinX, coinY, ellipseScaling);
+  //Ellipse that follows cursor 
   fill(fillrand2, 100, 100)
   ellipse(mouseX, mouseY, ellipseScaling);
+  //Text that appears at the top left stating the time, score and if the game is over
   fill(0, 0, 0)
   textAlign(LEFT)
   text(`Time remaining: ${time}`, 20, 40);
   text(`Score: ${score}`, 20, 20);
+  //Functions that handle the countdown, collisions, start, and restart
   handleTime();
   handleCollision();
   startButton();
@@ -38,7 +43,8 @@ function draw() {
 }
 
 function handleCollision() {
-  // We'll write code for what happens if your character hits a coin.
+  
+  //Object collision detection using P5 collisions, I could have used this the other day tbh
   hit = collideCircleCircle(mouseX, mouseY, ellipseScaling, coinX, coinY, ellipseScaling)
   if (hit == true && !gameIsOver && gameIsPlaying) {
 
@@ -51,8 +57,8 @@ function handleCollision() {
 }
 
 function handleTime() {
-  // We'll write code to handle the time.
-
+  
+  //Timer coundown
   if (time > 0) {
 
     time -= timeDecrease;
@@ -70,6 +76,7 @@ function handleTime() {
 
 function startButton() {
 
+  //Start Button
   if (!startClicked) {
     rectMode(CENTER)
     rect(windowWidthFixed/2, windowHeightFixed/2, windowWidthFixed/5, windowHeightFixed/20)
@@ -83,6 +90,7 @@ function startButton() {
 
   } 
 
+  //Start Button click detect
   if (mouseY > windowHeightFixed/2 - windowHeightFixed/40 && mouseY < windowHeightFixed/2 + windowHeightFixed/40 && mouseX > windowWidthFixed/2 - windowWidthFixed/10 && mouseX < windowWidthFixed/2 + windowWidthFixed/10 && mouseIsPressed) {
 
     startClicked = true
